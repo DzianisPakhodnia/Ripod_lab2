@@ -1,0 +1,48 @@
+﻿<Window x:Class="Ripod_lab2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ASAP Scheduler" Height="600" Width="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Панель управления -->
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <Button Content="Загрузить данные" Click="LoadData_Click" Width="150" Margin="5"/>
+            <Button Content="Выполнить ASAP" Click="RunASAP_Click" Width="150" Margin="5"/>
+        </StackPanel>
+
+        <!-- Основная область -->
+        <TabControl Grid.Row="1">
+            <!-- Вкладка Графа зависимостей -->
+            <TabItem Header="Граф зависимостей">
+                <ScrollViewer>
+                    <Canvas Name="GraphCanvas"/>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- Вкладка Матрицы смежности -->
+            <TabItem Header="Матрица смежности">
+                <DataGrid Name="AdjacencyMatrixGrid" AutoGenerateColumns="True"/>
+            </TabItem>
+
+            <!-- Вкладка Диаграммы Ганта -->
+            <TabItem Header="Диаграмма Ганта">
+                <Canvas Name="GanttCanvas"/>
+            </TabItem>
+
+            <!-- Вкладка Деталей (шаги, процессоры) -->
+            <TabItem Header="Детали выполнения">
+                <StackPanel>
+                    <TextBlock Text="Шаги выполнения:" FontWeight="Bold" Margin="5"/>
+                    <ListBox Name="StepsList" Height="150"/>
+
+                    <TextBlock Text="Процессоры по типам:" FontWeight="Bold" Margin="5"/>
+                    <ListBox Name="ProcessorsList" Height="100"/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
