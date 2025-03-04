@@ -16,18 +16,21 @@ namespace ASAP_Scheduler
         public void LoadData(string filePath)
         {
             var lines = File.ReadAllLines(filePath);
-            operationsCount = int.Parse(lines[0]);
+            operationsCount = int.Parse(lines[0].Trim()); // Убираем возможные лишние пробелы
             adjacencyMatrix = new int[operationsCount, operationsCount];
 
-            for (int i = 1; i <= operationsCount; i++)
+            for (int i = 0; i < operationsCount; i++) // Начинаем с 0, т.к. i соответствует строке в матрице
             {
-                var row = lines[i].Split(' ').Select(int.Parse).ToArray();
+                var row = lines[i + 1].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                                      .Select(int.Parse)
+                                      .ToArray();
                 for (int j = 0; j < operationsCount; j++)
                 {
-                    adjacencyMatrix[i - 1, j] = row[j];
+                    adjacencyMatrix[i, j] = row[j];
                 }
             }
         }
+
 
         public void ExecuteASAP()
         {

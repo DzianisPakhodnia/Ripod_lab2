@@ -1,5 +1,6 @@
 ﻿using ASAP_Scheduler;
 using System.Data;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -21,7 +22,7 @@ namespace Ripod_lab2
         private void LoadData_Click(object sender, RoutedEventArgs e)
         {
             asap = new ASAPAlgorithm();
-            asap.LoadData("C:\\Users\\yodas\\source\\repos\\Ripod_lab2\\Ripod_lab2\\TextFile1.txt");
+            asap.LoadData("C:\\Users\\Denis\\Desktop\\Ripod_lab2\\Ripod_lab2\\TextFile2.txt");
             MessageBox.Show("Данные загружены!");
 
             // Отображаем матрицу смежности с улучшенным стилем
