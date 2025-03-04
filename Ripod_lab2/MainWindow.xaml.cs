@@ -92,7 +92,8 @@ namespace Ripod_lab2
             StepsList.Items.Clear();
             for (int i = 0; i < asap.Steps.Count; i++)
             {
-                string stepDetails = $"Шаг {i + 1}: {string.Join(", ", asap.Steps[i])}";
+                string stepDetails = $"Шаг {i + 1}: {string.Join(", ", asap.Steps[i].Select(x => x + 1))}";
+
                 StepsList.Items.Add(stepDetails);
             }
         }
