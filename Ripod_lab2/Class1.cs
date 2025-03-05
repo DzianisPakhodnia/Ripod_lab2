@@ -13,15 +13,35 @@ namespace ASAP_Scheduler
         private int[,] adjacencyMatrix;
         private int operationsCount;
 
+        public static Dictionary<int, List<int>> graphDictionary = new Dictionary<int, List<int>>();
+
         public void LoadData(string filePath)
         {
             var lines = File.ReadAllLines(filePath);
-            operationsCount = int.Parse(lines[0].Trim()); // Убираем возможные лишние пробелы
+
+            // Чтение первых двух строк для словаря
+            for (int i = 0; i < 2; i++)
+            {
+                var parts = lines[i].Split(':'); // Разделяем по символу ":"
+                int key = int.Parse(parts[0].Trim());
+                var values = parts[1].Trim().Split(' '); // Разделяем на числа
+
+                List<int> neighbors = new List<int>();
+                foreach (var value in values)
+                {
+                    neighbors.Add(int.Parse(value));
+                }
+                graphDictionary[key] = neighbors; // Добавляем в словарь
+            }
+
+            // Чтение матрицы смежности и количества операций (следующие строки после словаря)
+            operationsCount = int.Parse(lines[2].Trim()); // Получаем количество операций (размер матрицы)
             adjacencyMatrix = new int[operationsCount, operationsCount];
 
-            for (int i = 0; i < operationsCount; i++) // Начинаем с 0, т.к. i соответствует строке в матрице
+            // Начинаем с 3-й строки, т.к. первые 3 строки уже обработаны
+            for (int i = 0; i < operationsCount; i++)
             {
-                var row = lines[i + 1].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                var row = lines[i + 3].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
                                       .Select(int.Parse)
                                       .ToArray();
                 for (int j = 0; j < operationsCount; j++)
@@ -30,6 +50,7 @@ namespace ASAP_Scheduler
                 }
             }
         }
+
 
 
         public void ExecuteASAP()
