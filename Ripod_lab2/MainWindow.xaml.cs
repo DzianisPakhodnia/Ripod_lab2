@@ -22,7 +22,7 @@ namespace Ripod_lab2
         private void LoadData_Click(object sender, RoutedEventArgs e)
         {
             asap = new ASAPAlgorithm();
-            asap.LoadData("C:\\Users\\Denis\\Desktop\\Ripod_lab2\\Ripod_lab2\\TextFile2.txt");
+            asap.LoadData("C:\\Users\\Denis\\Desktop\\Ripod_lab2\\Ripod_lab2\\TextFile1.txt");
             MessageBox.Show("Данные загружены!");
 
             // Отображаем матрицу смежности с улучшенным стилем
@@ -50,7 +50,6 @@ namespace Ripod_lab2
 
             // Показываем шаги и процессоры
             DisplaySteps();
-            DisplayProcessors();
         }
 
         // Отображение матрицы смежности
@@ -98,15 +97,6 @@ namespace Ripod_lab2
             }
         }
 
-        // Отображение процессоров
-        private void DisplayProcessors()
-        {
-            ProcessorsList.Items.Clear();
-            for (int i = 0; i < asap.ProcessorCounts.Count; i++)
-            {
-                string processorDetails = $"Тип {i + 1}: {asap.ProcessorCounts[i]} процессоров";
-                ProcessorsList.Items.Add(processorDetails);
-            }
-        }
+        
     }
 }

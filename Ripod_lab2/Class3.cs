@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Collections.Generic;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -9,6 +10,19 @@ namespace ASAP_Scheduler
         private Canvas canvas;
         private ASAPAlgorithm asap;
 
+
+        public static Dictionary<int, List<int>> graphDictionary1 = ASAPAlgorithm.graphDictionary;
+
+        public static void UpdateGraphDictionary()
+        {
+            foreach (var key in graphDictionary1.Keys.ToList())
+            {
+                graphDictionary1[key] = graphDictionary1[key].Select(x => x - 1).ToList();
+            }
+        }
+
+
+
         public GanttChartDrawer(Canvas ganttCanvas, ASAPAlgorithm algorithm)
         {
             canvas = ganttCanvas;
@@ -17,6 +31,12 @@ namespace ASAP_Scheduler
 
         public void DrawChart()
         {
+            foreach (var key in graphDictionary1.Keys.ToList())
+            {
+                graphDictionary1[key] = graphDictionary1[key].Select(x => x - 1).ToList();
+            }
+
+
             canvas.Children.Clear();
             int stepHeight = 50;
             int xOffset = 50;
@@ -34,9 +54,19 @@ namespace ASAP_Scheduler
                 foreach (var op in asap.Steps[i])
                 {
                     // Установка цвета в зависимости от типа операции
-                    Brush opColor = (op % 2 == 0) ? Brushes.Coral : Brushes.LightGreen;
+                    Brush opColor;
 
-                    Rectangle rect = new Rectangle
+                    if (graphDictionary1.ContainsKey(1) && graphDictionary1[1].Contains(op))
+                    {
+                        opColor = Brushes.Green;
+
+
+                    }
+                    else
+                    {
+                        opColor = Brushes.Red;
+                    }
+                        Rectangle rect = new Rectangle
                     {
                         Width = 60,
                         Height = 30,

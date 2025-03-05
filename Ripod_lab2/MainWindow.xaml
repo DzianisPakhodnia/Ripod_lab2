@@ -37,10 +37,7 @@
             <TabItem Header="Детали выполнения">
                 <StackPanel>
                     <TextBlock Text="Шаги выполнения:" FontWeight="Bold" Margin="5"/>
-                    <ListBox Name="StepsList" Height="150"/>
-
-                    <TextBlock Text="Процессоры по типам:" FontWeight="Bold" Margin="5"/>
-                    <ListBox Name="ProcessorsList" Height="100"/>
+                    <ListBox Name="StepsList" Height="253"/>
                 </StackPanel>
             </TabItem>
         </TabControl>
